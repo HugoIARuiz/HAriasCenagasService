@@ -6,9 +6,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.relational.core.mapping.Table;
 
 @Entity(name = "UGTP_TBL_NODOCOMRECEPCION")
 @Getter
@@ -18,10 +21,18 @@ public class NodoComRecepcion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idnodorecepcion")
-    private Integer idNodoRecepcion;
+    private Long idNodoRecepcion;
+    @NotBlank(message = "Ingresa un nombre, ")
+    @Size(min = 1, max = 50, message = "Entre 1 y 50 caracteres")
     @Column(name = "nombre")
-    private String nombreNodoRecepcion;
+    private String nombre;
+    @NotBlank(message = "Ingresa una descripcion, ")
+    @Size(min = 1, max = 50, message = "Entre 1 y 80 caracteres")
     @Column(name = "descripcion")
-    private String descripcionNRecepcion;
+    private String descripcion;
+    @JoinColumn(name = "idzonatarifainyeccion")
+    @ManyToOne
+    public ZonaTarifa zonaTarifa;
+    
     
 }

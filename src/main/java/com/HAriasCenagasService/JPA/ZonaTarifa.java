@@ -6,9 +6,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.relational.core.mapping.Table;
+
 
 @Entity(name = "UGTP_TBL_ZONATARIFA")
 @Getter 
@@ -19,7 +21,9 @@ public class ZonaTarifa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idzonatarifa")
     private Integer idZonaTarifa;
+    @NotBlank(message = "Ingresa un nombre, ")
+    @Size(min = 3, max = 50, message = "Entre 3 y 50 caracteres")
     @Column(name = "nombre")
-    private String nombreZona;
+    private String nombre;
     
 }
